@@ -1,0 +1,10 @@
+*~
+*#
+tmp*
+*tmp
+.idea
+venv
+*.db
+test.py
+__pycache__
+.gitignore
