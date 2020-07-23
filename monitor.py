@@ -97,24 +97,16 @@ class Monitor:
         return buff
 
     # gets the rows of the queries as tuples and makes them more user friendly
-    def tuple_to_readable_string(self, _tuple, timeValue, qt):
-        buff = ""
-        if qt == 1:
-            buff += "Query id : " + self.format_id(_tuple[0]) + " => "
-            indent = self.format_time_values(_tuple[2], timeValue)
-            while len(indent) < self.indentBeforeCalls - 2:
-                indent += ' '
-            buff += indent + " | avg time : " + self.format_time_values(_tuple[3], True)
+    def tuple_to_readable_string(self, _tuple, timeValue):
+        buff = "Query id : " + self.format_id(_tuple[0]) + " => "
+        indent = self.format_time_values(_tuple[2], timeValue)
+        while len(indent) < self.indentBeforeCalls:
+            indent += ' '
+        buff += indent + " | " + str(_tuple[3])
+        if _tuple[3] > 1:
+            buff += " calls"
         else:
-            buff += "Query id : " + self.format_id(_tuple[0]) + " => "
-            indent = self.format_time_values(_tuple[2], timeValue)
-            while len(indent) < self.indentBeforeCalls:
-                indent += ' '
-            buff += indent + " | " + str(_tuple[3])
-            if _tuple[3] > 1:
-                buff += " calls"
-            else:
-                buff += " call"
+            buff += " call"
         if len(buff) < self.indentBeforeQuery:
             while len(buff) < self.indentBeforeQuery:
                 buff += ' '
@@ -122,14 +114,14 @@ class Monitor:
         return buff
 
     # makes a human-readable display of the query results
-    def format_and_display(self, results, test, timeFormat, qt):
+    def format_and_display(self, results, test, timeFormat):
         buff = "\n"
         buff += " =========\n"
         buff += test + "\n"
         buff += " =========\n"
         buff += "\n"
         for x in results:
-            buff += self.tuple_to_readable_string(x, timeFormat, qt)
+            buff += self.tuple_to_readable_string(x, timeFormat)
         self.output_text(buff)
 
     # generates the instruction that is added to the query in order to only get the relevant information
@@ -155,28 +147,28 @@ class Monitor:
     
     # gets the most used queries
     def get_most_used(self):
-        self.format_and_display(self.get_records(self.get_query("calls, mean_time FROM pg_stat_statements", "ORDER BY calls DESC")),
-                                'Queries that where the most used by amount', False, 1)
+        self.format_and_display(self.get_records(self.get_query("mean_time, calls FROM pg_stat_statements", "ORDER BY calls DESC")),
+                                'Queries that where the most used by amount', True)
     
     # gets the queries that required the most time accumulated
     def get_biggest_time_accumulated(self):
         self.format_and_display(self.get_records(self.get_query("total_time, calls FROM pg_stat_statements", "ORDER BY total_time DESC")),
-                                'Queries that required the most time accumulated', True, 2)
+                                'Queries that required the most time accumulated', True)
     
     # gets the queries that required the most time on average
     def get_biggest_time_average(self):
         self.format_and_display(self.get_records(self.get_query("mean_time, calls FROM pg_stat_statements", "ORDER BY mean_time DESC")),
-                                'Queries that required the most time per use on average', True, 2)
+                                'Queries that required the most time per use on average', True)
     
     # gets the queries that returned the most rows on average
     def get_most_rows_returned_average(self):
         self.format_and_display(self.get_records(self.get_query("rows / calls, calls FROM pg_stat_statements", "ORDER BY rows / calls DESC")),
-                                'Queries that returned the most rows on average', False, 2)
+                                'Queries that returned the most rows on average', False)
     
     # gets the queries that returned the most rows accumulated
     def get_most_rows_returned_accumulated(self):
         self.format_and_display(self.get_records(self.get_query("rows, calls FROM pg_stat_statements", "ORDER BY rows DESC")),
-                                'Queries that returned the most rows accumulated', False, 2)
+                                'Queries that returned the most rows accumulated', False)
     
     # adds the view to the database should it not exist ( needed in order to get the stats )
     def init_the_database(self):
