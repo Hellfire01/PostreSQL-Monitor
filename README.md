@@ -24,3 +24,53 @@ Should it still not work, please set the console display ( writeOnConsole ) to T
 Details on the working of this table here : https://www.postgresql.org/docs/9.6/static/pgstatstatements.html
 
 script author : Matthieu Raynaud de Fitte
+
+### Example output :
+The following output was obtained with the following instruction : `"dbname=test_database user=user password=my-password host=127.0.0.1 port=5432" all 10`<br />
+
+     =========
+    Queries that where the most used by amount
+     =========
+    
+    Query id :    2397681704071010949 => 15       | avg time : 0.0000ms Query : BEGIN
+    Query id :    3694949039461716331 => 8        | avg time : 0.0000ms Query : COMMIT
+    Query id :   -5232434073356610674 => 1        | avg time : 0.0007ms Query : SELECT d.datname as "Name", pg_catalog.pg_get_userbyid(d ...
+    Query id :    4346420983535608038 => 1        | avg time : 0.0005ms Query : select * from test
+
+     =========
+    Queries that required the most time accumulated
+     =========
+    
+    Query id :   -5232434073356610674 => 0.0007ms   | 1 call Query : SELECT d.datname as "Name", pg_catalog.pg_get_userbyid(d ...
+    Query id :    4346420983535608038 => 0.0005ms   | 1 call Query : select * from test
+    Query id :    2397681704071010949 => 0.0001ms   | 15 calls Query : BEGIN
+    Query id :    3694949039461716331 => 0.0001ms   | 8 calls Query : COMMIT
+    
+     =========
+    Queries that required the most time per use on average
+     =========
+    
+    Query id :   -5232434073356610674 => 0.0007ms   | 1 call Query : SELECT d.datname as "Name", pg_catalog.pg_get_userbyid(d ...
+    Query id :    4346420983535608038 => 0.0005ms   | 1 call Query : select * from test
+    Query id :    3694949039461716331 => 0.0000ms   | 8 calls Query : COMMIT
+    Query id :    2397681704071010949 => 0.0000ms   | 15 calls Query : BEGIN
+    
+     =========
+    Queries that returned the most rows on average
+     =========
+    
+    Query id :    4346420983535608038 => 27         | 1 call Query : select * from test
+    Query id :   -5232434073356610674 => 4          | 1 call Query : SELECT d.datname as "Name", pg_catalog.pg_get_userbyid(d ...
+    Query id :    3694949039461716331 => 0          | 8 calls Query : COMMIT
+    Query id :    2397681704071010949 => 0          | 15 calls Query : BEGIN
+    
+     =========
+    Queries that returned the most rows accumulated
+     =========
+    
+    Query id :    4346420983535608038 => 27         | 1 call Query : select * from test
+    Query id :   -5232434073356610674 => 4          | 1 call Query : SELECT d.datname as "Name", pg_catalog.pg_get_userbyid(d ...
+    Query id :    3694949039461716331 => 0          | 8 calls Query : COMMIT
+    Query id :    2397681704071010949 => 0          | 15 calls Query : BEGIN
+
+
