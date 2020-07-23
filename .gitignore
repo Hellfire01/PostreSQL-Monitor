@@ -9,3 +9,4 @@ test.py
 __pycache__
 .gitignore
 output*
+monitor_usage_examples.py
