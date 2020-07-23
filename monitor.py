@@ -121,12 +121,16 @@ def format_time_values(value, timeValue):
 
 # formats the id to make sure it lines up correctly
 def format_id(id):
+    ref_id = id
+    if ref_id < 0:
+        ref_id = ref_id * -1  # ensures that the buffering will correctly take into account the length of the id
+        ref_id = ref_id * 10  # to take into account the '-' at the start of a negative number
     i = 0
-    value = 9
+    value = 20
     buff = ''
     ref = 10
     while i < value:
-        if ref >= id:
+        if ref >= ref_id:
             break
         i += 1
         ref = ref * 10
@@ -256,17 +260,14 @@ def printHelp():
     buff = ""
     buff += "\n"
     buff += "\n"
-    buff += "This script's purpose is to give statistics of the database in order to know witch are queries that need " \
-            "to be tweaked or watched\n"
-    buff += "It is possible to change the output file's name among other things at the top of this script under the " \
-            "CONFIG title\n"
+    buff += "This script's purpose is to give statistics of the database in order to know witch are queries that need to be tweaked or watched\n"
+    buff += "It is possible to change the output file's name among other things at the top of this script under the CONFIG title\n"
     buff += "\n"
     buff += "\n"
     buff += "to display the query associated to a query id :\n"
     buff += "python thisScript [queryid]\n"
     buff += "\n"
-    buff += "to display the statistics on the queries, the program understands the following instructions " \
-            "( they can be put one after an other )\n"
+    buff += "to display the statistics on the queries, the program understands the following instructions ( they can be put one after an other )\n"
     buff += "\n"
     buff += "mostUsed => displays the most used queries\n"
     buff += "longestTimeAccumulated => displays the queries that required the most time accumulated\n"
