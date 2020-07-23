@@ -375,6 +375,7 @@ def exec_instructions():
 # preparing the output file
 output_file = prep_file()
 # booleans used to determine what needs printing ( set to true with arguments of the same name passed to the script )
+# these values are NOT configuration related, they are overwritten by user input by command line
 displayMostUsed = False
 displayLongestTimeAccumulated = False
 displayLongestTimeOnAverage = False

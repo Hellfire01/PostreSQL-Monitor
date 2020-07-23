@@ -2,19 +2,61 @@
 This is a simple script that aims to be able to diagnose heavy SQL queries and show them in an easy to understand manner 
 
 ### What does it do ?
+This script was designed to be either used as a command line or for a slack / discord bot and can also write to a file<br/>
 The script will display queries that :
-- are the most called
+- are the most used
 - required the most accumulated time for all usages
-- required the most time for one usage
 - required the most time on average
 - returned the most rows with one usage
+- returned the most rows on average
 For each of these criteria, the 10 queries that had the biggest result are displayed
 
 ### How to use
-This script was designed to be either used as a command line or for a slack / discord bot and can also write to a file<br/>
-Using it as a bot allows for daily / hourly / ... health checks of your database
+First, the database needs to be configured in order to allow the monitoring. This can be done at the following link : <a href='https://gist.github.com/troyk/4462899'>here</a>
+
+Next, the script uses the following library to connect to the database and requires it to work : `psycopg2`
+
+Note : the script monitor.py does **NOT** store any credentials, they need to be given by argument. You can also modify the code to hard code them should you prefer to do so
+
+The script uses the following arguments :
+- `-h` to display help ( standalone argument )
+
+All other arguments will require the authentication string<br />
+The authentication string is just as described in the `psycopg2` documentation
+
+Example of authentication string :<br />
+`"dbname=test user=user password=my-password host=127.0.0.1 port=5432"`
+
+The variables ( can be placed in any order ) are as follow :
+- **dbname** => the name of the database you with to diagnose
+- **user** => the username
+- **password** => the password of the user
+- **host** => IP address of the database server
+- **port** => port used to connect to the database of the database server
+
+The instructions that can be given are :
+- authentication string + query id => Will display the full SQL query of the associated id<br/>
+The ids are displayed using any of the other instructions
+- authentication string + `mostUsed` + quantity => will show the the most used queries
+- authentication string + `longestTimeAccumulated` + quantity => will show the queries that required the most accumulated time
+- authentication string + `longestTimeOnAverage` + quantity => will show the queries that required the most time on average
+- authentication string + `mostRowsReturnedAccumulated` + quantity => will show the queries that returned the most rows accumulated
+- authentication string + `mostRowsReturnedAverage` + quantity => will show the queries that returned the most rows on average
+- authentication string + `all` + quantity => will show all of the queries just as if you had call all 5 instructions
+
+`quantity` is a positive integer used for the maximum displayed queries
+
+**Note** : the previously shown arguments arguments can be used simultaneously. Therefor the following instruction is valid :<br/>
+`[replace with authentification string] mostUsed longestTimeOnAverage mostRowsReturnedAccumulated 10`<br/>
+It will display just the queries for `mostUsed`, `longestTimeOnAverage` and `mostRowsReturnedAccumulated` one after an other
+
+**Note** : the queries used by this program will be displayed among the other queries
+
+### Configuration
 
 ### Troubleshooting
+**Important** : the script will only show everything *from the moment the postgresql options are enabled* ***and*** *the server restarted*
+
 Should this script not work, please make sure that :
 - make sure that the postgresql is correctly configured as shown here : https://gist.github.com/troyk/4462899
 - the chosen file name is correct with write permissions
@@ -27,6 +69,8 @@ script author : Matthieu Raynaud de Fitte
 
 ### Example output :
 The following output was obtained with the following instruction : `"dbname=test_database user=user password=my-password host=127.0.0.1 port=5432" all 10`<br />
+Note : some queries can be very long, this is why the query id is displayed. This allows the output to not be cluttered with very long queries and allow you to display the important queries using the id directly
+<br />
 
      =========
     Queries that where the most used by amount
