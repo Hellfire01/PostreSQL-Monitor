@@ -283,10 +283,6 @@ def printHelp():
     buff += "Will display the 30 queries that where the most used and the 30 queries that returned the most" \
             " rows on average\n"
     buff += "\n"
-    buff += "\n"
-    buff += "This script was made by the following person : Matthieu Raynaud de Fitte\n"
-    buff += "please refer to him should there ever be an issue with this script\n"
-    buff += "\n"
     output_text(buff)
 
 
@@ -385,6 +381,11 @@ displayMostRowsReturnedAccumulated = False
 displayMostRowsReturnedAverage = False
 limit = -1
 
+
+if len(sys.argv) == 1:
+    print("This script needs at least one argument to work properly")
+    print("Use -h for help")
+    exit(0)
 if len(sys.argv) == 2:  # just print the query from the id
     if sys.argv[1] == "-h" or sys.argv[1] == "--help":
         printHelp()
@@ -397,8 +398,9 @@ try:
     dbConnexion = psycopg2.connect(sys.argv[1])
     cursor = dbConnexion.cursor()
     init_the_database()
-except Exception:
+except Exception as e:
     output_text("Error : could not connect to the database with connection string \"" + sys.argv[1] + "\"")
+    output_text("Message is : " + str(e))
     exit(2)
 
 if len(sys.argv) == 3:
