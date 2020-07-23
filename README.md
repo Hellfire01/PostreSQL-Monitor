@@ -47,7 +47,7 @@ The ids are displayed using any of the other instructions
 `quantity` is a positive integer used for the maximum displayed queries
 
 **Note** : the previously shown arguments arguments can be used simultaneously. Therefor the following instruction is valid :<br/>
-`[replace with authentification string] mostUsed longestTimeOnAverage mostRowsReturnedAccumulated 10`<br/>
+`[authentification string] mostUsed longestTimeOnAverage mostRowsReturnedAccumulated 10`<br/>
 It will display just the queries for `mostUsed`, `longestTimeOnAverage` and `mostRowsReturnedAccumulated` one after an other
 
 **Note** : the queries that are used by this program to gather all of the displayed data will be displayed among the other queries of your database
