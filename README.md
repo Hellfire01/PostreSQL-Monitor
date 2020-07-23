@@ -38,10 +38,10 @@ The instructions that can be given are :
 - authentication string + query id => Will display the full SQL query of the associated id<br/>
 The ids are displayed using any of the other instructions
 - authentication string + `mostUsed` + quantity => will show the the most used queries
-- authentication string + `longestTimeAccumulated` + quantity => will show the queries that required the most accumulated time
-- authentication string + `longestTimeOnAverage` + quantity => will show the queries that required the most time on average
-- authentication string + `mostRowsReturnedAccumulated` + quantity => will show the queries that returned the most rows accumulated
-- authentication string + `mostRowsReturnedAverage` + quantity => will show the queries that returned the most rows on average
+- authentication string + `longestTimeAccumulated` + quantity => queries that required the most accumulated time
+- authentication string + `longestTimeOnAverage` + quantity => queries that required the most time on average
+- authentication string + `mostRowsReturnedAccumulated` + quantity => queries that returned the most rows accumulated
+- authentication string + `mostRowsReturnedAverage` + quantity => queries that returned the most rows on average
 - authentication string + `all` + quantity => will show all of the queries just as if you had call all 5 instructions
 
 `quantity` is a positive integer used for the maximum displayed queries
