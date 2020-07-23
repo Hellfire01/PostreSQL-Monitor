@@ -354,15 +354,16 @@ class Monitor:
         # === display ===
 
         # Size of the truncated query being displayed ( must be an integer > 5 to work properly )
+        # Will not truncate queries that are shorter than the truncatedQuerySize
         self.truncatedQuerySize = 60
-        # size of the alignment for the queries ( must me a positive integer to work )
-        self.indentBeforeQuery = 55
-        # size of the alignment for calls ( must me a positive integer to work )
+        # size of the alignment ( start of line until the Query keyword ) for the queries ( must me a positive integer to work )
+        self.indentBeforeQuery = 65
+        # size of the alignment for calls ( from end of '=>' until '|', must me a positive integer to work )
         self.indentBeforeCalls = 10
 
         # === debug ===
 
-        # bool used to display the queries that the program uses itself ( True ) or not ( False )
+        # bool used to display the queries that the program uses itself to get the displayed information ( True ) or not ( False )
         self.displayUsedQueries = False
 
         # ============================
