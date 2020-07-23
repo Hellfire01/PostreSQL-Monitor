@@ -191,37 +191,6 @@ class Monitor:
         except ValueError:
             return False
 
-    # prints help / instructions
-    def printHelp(self):
-        buff = ""
-        buff += "\n"
-        buff += "\n"
-        buff += "This script's purpose is to give statistics of the database in order to know witch are queries that need to be tweaked or watched\n"
-        buff += "It is possible to change the output file's name among other things at the top of this script under the CONFIG title\n"
-        buff += "\n"
-        buff += "\n"
-        buff += "to display the query associated to a query id :\n"
-        buff += "python thisScript [queryid]\n"
-        buff += "\n"
-        buff += "to display the statistics on the queries, the program understands the following instructions ( they can be put one after an other )\n"
-        buff += "\n"
-        buff += "mostUsed => displays the most used queries\n"
-        buff += "longestTimeAccumulated => displays the queries that required the most time accumulated\n"
-        buff += "longestTimeOnAverage => displays the queries that required the most time on average\n"
-        buff += "mostRowsReturnedAccumulated => displays the queries that returned the most rows accumulated\n"
-        buff += "mostRowsReturnedAverage => displays the queries that returned the most rows on average\n"
-        buff += "all => displays all of the options above\n"
-        buff += "\n"
-        buff += "the instructions should be followed by a positive integer > 0 to determine the amount of queries to " \
-                "display or they will not be recognized as instructions\n"
-        buff += "\n"
-        buff += "Ex :\n"
-        buff += "python thisScript mostUsed mostRowsReturnedAverage 30\n"
-        buff += "Will display the 30 queries that where the most used and the 30 queries that returned the most" \
-                " rows on average\n"
-        buff += "\n"
-        self.output_text(buff)
-    
     # parses all of the arguments given to the script in order to know what to display
     def parse_instructions(self, argv):
         i = 0
@@ -260,15 +229,15 @@ class Monitor:
                 self.displayMostRowsReturnedAccumulated = True
                 self.displayMostRowsReturnedAverage = True
                 continue
-            self.output_text("Error : unknown argument '" + x + "'\n'-h' or '--help' for instructions")
+            self.output_text("Error : unknown argument '" + x + "'\n'")
+            self.output_text("Known arguments are : 'mostUsed', 'longestTimeAccumulated', 'longestTimeOnAverage', 'mostRowsReturnedAccumulated', 'mostRowsReturnedAverage' and 'all' \n")
             return False
         return True
     
     # prints the query from the given id
     def print_query_from_id(self, argv):
         if self.is_int(argv[1]) is False:
-            self.output_text("Error : unknown argument '" + argv[1] + "', was expecting an integer for only argument\n"
-                             "'-h' or '--help' for instructions")
+            self.output_text("Error : unknown argument '" + argv[1] + "\nExpected a query id as argument if no other instructions are given")
             return False
         buff = "\n"
         buff += " =========\n"
@@ -300,17 +269,9 @@ class Monitor:
     
     # executes the instruction with the given arguments
     def run(self, *argv):
-        if len(argv) == 0:
-            print("This script needs at least one argument to work properly")
-            print("Use -h for help")
+        if len(argv) < 2:
+            self.output_text("This class needs at least 2 arguments to be able to run")
             exit(0)
-        if len(argv) == 1:  # just print the query from the id
-            if argv[0] == "-h" or argv[0] == "--help":
-                self.printHelp()
-                exit(0)
-            else:
-                self.output_text("unrecognised argument '" + argv[0] + "'. Use -h for help")
-                exit(1)
         try:
             # get a connection, if a connect cannot be made an exception will be raised here
             self.dbConnexion = psycopg2.connect(argv[0])

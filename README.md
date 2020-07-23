@@ -16,7 +16,7 @@ First, the database needs to be configured in order to allow the monitoring. Thi
 
 Next, the script uses the following library to connect to the database and requires it to work : `psycopg2`
 
-Note : the script monitor.py does **NOT** store any credentials, they need to be given by argument. You can also modify the code to hard code them should you prefer to do so
+The following instructions use the `monitor_main.py` file but all instructions can be directly given to the `Monitor` class in the same order
 
 The script uses the following arguments :
 - `-h` to display help ( standalone argument )
@@ -50,8 +50,8 @@ The ids are displayed using any of the other instructions
 `[authentification string] mostUsed longestTimeOnAverage mostRowsReturnedAccumulated 10`<br/>
 It will display just the queries for `mostUsed`, `longestTimeOnAverage` and `mostRowsReturnedAccumulated` one after an other
 
-**Note** : the queries that are used by this program to gather all of the displayed data will be displayed among the other queries of your database
-&
+**Note** : the queries that are used by this program are not displayed by default. See the configurations variables to display them
+
 ## Configuration
 
 ## Troubleshooting
