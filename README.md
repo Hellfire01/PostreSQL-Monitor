@@ -50,7 +50,8 @@ The ids are displayed using any of the other instructions
 
 **Note** : the previously shown arguments arguments can be used simultaneously. Therefor the following instruction is valid :<br/>
 `[authentification string] mostUsed longestTimeOnAverage mostRowsReturnedAccumulated 10`<br/>
-It will display just the queries for `mostUsed`, `longestTimeOnAverage` and `mostRowsReturnedAccumulated` one after an other
+It will display just the queries for `mostUsed`, `longestTimeOnAverage` and `mostRowsReturnedAccumulated` one after an other<br/>
+Using the same argument twice will not display it twice
 
 **Note** : the queries that are used by this program are not displayed by default. See the configurations variables to display them
 

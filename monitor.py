@@ -233,10 +233,10 @@ class Monitor:
             return False
         buff = "\n"
         buff += " =========\n"
-        buff += "displaying query of queryid " + argv[1] + "\n"
+        buff += "displaying query of queryid " + str(argv[1]) + "\n"
         buff += " =========\n"
         buff += "\n"
-        self.cursor.execute("SELECT query FROM pg_stat_statements WHERE queryid = %s", (int(argv[1]),))
+        self.cursor.execute("SELECT query FROM pg_stat_statements WHERE queryid = %s", (str(argv[1]),))
         res = self.cursor.fetchall()
         if len(res) == 0:
             buff += "Error : there is no queries matching that id"
