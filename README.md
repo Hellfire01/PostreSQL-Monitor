@@ -58,15 +58,15 @@ Using the same argument twice will not display it twice
 # Configuration
 
 The following class instance variables are used to configure the monitor to your needs :
-`useIgnore` ( boolean ) is used to determine if queries possessing the substrings in the `ignore` variable should be ignored or not<br/>
-`ignore` ( string array ) this array of strings / substrings is used to exclude queries from the displayed query list<br/>
+- `useIgnore` ( boolean ) is used to determine if queries possessing the substrings in the `ignore` variable should be ignored or not<br/>
+- `ignore` ( string array ) this array of strings / substrings is used to exclude queries from the displayed query list<br/>
 By default, the following are ignored : "pg_stat_statements", "pg_catalog", "ALTER TABLE", "TRUNCATE TABLE" and "CREATE TABLE"<br/>
-`writeOnConsole` ( boolean ) to allow ( True ) or forbid ( False ) the monitor to output on the console<br/>
-`writeToFile` ( boolean ) to allow ( True ) or forbid ( False ) the monitor to output on a file<br/>
-`filename` ( string ) is the file name that is used by the monitor ( will be overwritten )<br/>
-`truncatedQuerySize` ( integer ) is used to shorted the query lengths. It is mostly used for long queries or small terminals
-`indentBeforeQuery` and `indentBeforeCalls` ( integer ) are used to insert blank spaces and try to get all the data displayed as neatly as possible <br/>
-`displayUsedQueries` ( boolean ) is used to display the queries that the program is using to gather the displayed data
+- `writeOnConsole` ( boolean ) to allow ( True ) or forbid ( False ) the monitor to output on the console<br/>
+- `writeToFile` ( boolean ) to allow ( True ) or forbid ( False ) the monitor to output on a file<br/>
+- `filename` ( string ) is the file name that is used by the monitor ( will be overwritten )<br/>
+- `truncatedQuerySize` ( integer ) is used to shorted the query lengths. It is mostly used for long queries or small terminals
+- `indentBeforeQuery` and `indentBeforeCalls` ( integer ) are used to insert blank spaces and try to get all the data displayed as neatly as possible <br/>
+- `displayUsedQueries` ( boolean ) is used to display the queries that the program is using to gather the displayed data
 
 # Troubleshooting
 **Important** : the script will only show everything *from the moment the postgresql options are enabled* ***and*** *the server restarted*. Anything prior will not be shown as the database was not
