@@ -18,12 +18,12 @@ Next, the script uses the following library to connect to the database and requi
 
 The following instructions use the `monitor_main.py` file but all instructions can be directly given to the `Monitor` class in the same order
 
-The script uses the following arguments :
-- `-h` to display help ( standalone argument )
+The script uses the following arguments : <br/>
+authentication string + display instruction(s) + quantity<br/>
+or :<br/>
+authentication string + query id
 
-All other arguments will require the authentication string<br />
-The authentication string is just as described in the `psycopg2` documentation
-
+The authentication string is just as described in the `psycopg2` documentation<br/>
 Example of authentication string :<br />
 `"dbname=test user=user password=my-password host=127.0.0.1 port=5432"`
 
@@ -45,6 +45,8 @@ The ids are displayed using any of the other instructions
 - authentication string + `all` + quantity => will show all of the queries just as if you had call all 5 instructions
 
 `quantity` is a positive integer used for the maximum displayed queries
+
+`query id` is one of the ids displayed by one of the other instructions. It is used to see the entire, indented and non truncated query
 
 **Note** : the previously shown arguments arguments can be used simultaneously. Therefor the following instruction is valid :<br/>
 `[authentification string] mostUsed longestTimeOnAverage mostRowsReturnedAccumulated 10`<br/>
