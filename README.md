@@ -1,7 +1,7 @@
 # PostreSQL-Monitor
 This is a simple script that aims to be able to diagnose heavy SQL queries and show them in an easy to understand manner 
 
-## What does it do ?
+# What does it do ?
 This script was designed to be either used as a command line or for a slack / discord bot and can also write to a file<br/>
 The script will display queries that :
 - are the most used
@@ -11,7 +11,7 @@ The script will display queries that :
 - returned the most rows on average
 For each of these criteria, the 10 queries that had the biggest result are displayed
 
-## How to use
+# How to use
 First, the database needs to be configured in order to allow the monitoring. This can be done at the following link : <a href='https://gist.github.com/troyk/4462899'>https://gist.github.com/troyk/4462899</a>
 
 Next, the script uses the following library to connect to the database and requires it to work : `psycopg2`
@@ -52,9 +52,20 @@ It will display just the queries for `mostUsed`, `longestTimeOnAverage` and `mos
 
 **Note** : the queries that are used by this program are not displayed by default. See the configurations variables to display them
 
-## Configuration
+# Configuration
 
-## Troubleshooting
+The following class instance variables are used to configure the monitor to your needs :
+`useIgnore` ( boolean ) is used to determine if queries possessing the substrings in the `ignore` variable should be ignored or not<br/>
+`ignore` ( string array ) this array of strings / substrings is used to exclude queries from the displayed query list<br/>
+By default, the following are ignored : "pg_stat_statements", "pg_catalog", "ALTER TABLE", "TRUNCATE TABLE" and "CREATE TABLE"<br/>
+`writeOnConsole` ( boolean ) to allow ( True ) or forbid ( False ) the monitor to output on the console<br/>
+`writeToFile` ( boolean ) to allow ( True ) or forbid ( False ) the monitor to output on a file<br/>
+`filename` ( string ) is the file name that is used by the monitor ( will be overwritten )<br/>
+`truncatedQuerySize` ( integer ) is used to shorted the query lengths. It is mostly used for long queries or small terminals
+`indentBeforeQuery` and `indentBeforeCalls` ( integer ) are used to insert blank spaces and try to get all the data displayed as neatly as possible <br/>
+`displayUsedQueries` ( boolean ) is used to display the queries that the program is using to gather the displayed data
+
+# Troubleshooting
 **Important** : the script will only show everything *from the moment the postgresql options are enabled* ***and*** *the server restarted*. Anything prior will not be shown as the database was not
 saving the required data
 
@@ -66,7 +77,7 @@ Should this script not work, please make sure that :
 Should it still not work, please set the console display ( `writeOnConsole` ) to True in order to see any other possible errors<br/>
 Details on the working of this table here : https://www.postgresql.org/docs/9.6/static/pgstatstatements.html
 
-## Example :
+# Example :
 The following output was obtained with the following instruction : `"dbname=test_database user=user password=my-password host=127.0.0.1 port=5432" all 10`<br />
 Note : some queries can be very long, this is why the query id is displayed. This allows the output to not be cluttered with very long queries and allow you to display the important queries using the id directly
 <br />
